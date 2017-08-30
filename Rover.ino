@@ -122,6 +122,13 @@ void loop() {
         
         servoD.write(dire);
       }
+     /* else{
+        if (Wii.getButtonClick(B)) {
+          motor.write(117);
+        }
+        else
+          motor.write(100);
+      }*/
 
       if (Wii.nunchuckConnected) {
         if (Wii.getAnalogHat(HatX) > 137 ||  Wii.getAnalogHat(HatX) < 117 || Wii.getAnalogHat(HatY) > 137 || Wii.getAnalogHat(HatY) < 117) {
@@ -131,12 +138,39 @@ void loop() {
           
           servoY.write(x);
           servoZ.write(y+40);
+          
         }
         
       }
       if(!printAngle){
-        servoD.write(90);
-        motor.write(102);
+        //servoD.write(90);
+       // motor.write(102);
+        if (Wii.getButtonClick(LEFT)) {
+          servoD.write(0);
+        }
+        if (Wii.getButtonClick(RIGHT)) {
+          servoD.write(180);
+        }
+
+        if (Wii.getButtonClick(B)) {
+          motor.write(117);
+          Serial.print("Entra");
+          delay(200);
+          motor.write(102);
+          delay(500);
+          servoD.write(90);
+        }
+        if(Wii.getButtonClick(UP)){
+          motor.write(102);
+          servoD.write(90);
+        }
+        if(Wii.getButtonClick(DOWN)){
+          servoD.write(90);
+          motor.write(70);
+          delay(500);
+          motor.write(102);
+          servoD.write(90);
+        }
       }
     
  }
